@@ -16,18 +16,18 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  .shadow-right {
+    box-shadow: 10px 0 10px -5px rgba(211, 211, 211, 0);
   }
 }
