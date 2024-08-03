@@ -1,7 +1,10 @@
-import { DefaultSession } from "next-auth";
+import { type DefaultSession } from "next-auth";
 
 export type ExtendedUser = DefaultSession["user"] & {
-  municipality?: string;
+  // municipality?: {
+  //   name: string;
+  //   city: string;
+  // };
 };
 
 declare module "next-auth" {

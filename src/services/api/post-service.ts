@@ -1,7 +1,8 @@
 import api from "@/lib/axios";
+import Post from "@/types/models/post";
 
 class PostService {
-  getPosts = async () => api.get("/publication/active?skip=0&limit=10&city");
+  getAllPosts = async () => await api.get<Array<Post>>("/publication");
 }
 
 export default new PostService();

@@ -7,9 +7,5 @@ export interface ActionResponse {
 export interface AuthResponse {
   firstName: string;
   lastName: string;
-  municipality: {
-    name: string;
-    city: string;
-  };
   access_token: string;
 }

@@ -1,4 +1,4 @@
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 import { PropsWithChildren } from "react";
 
 import { Metadata } from "next";
@@ -12,12 +12,14 @@ export default async function AdminLayout({ children }: PropsWithChildren) {
   const session = await auth();
 
   return (
-    <div className="h-screen flex">
+    <div className="flex">
       {/* sidebar*/}
-      <Sidebar />
+      <Sidebar session={session} />
 
       {/* content */}
-      <main className="w-full h-full bg-gray-50 p-6">{children}</main>
+      <main className="h-screen overflow-y-auto w-full bg-gray-50 px-6 py-8 flex justify-center">
+        <div className="max-w-screen-2xl w-full">{children}</div>
+      </main>
     </div>
   );
 }
