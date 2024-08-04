@@ -1,7 +1,5 @@
 import type { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import api from "./lib/axios";
-import { AuthResponse } from "./types/response";
 import { AxiosError } from "axios";
 import type { NextAuthConfig } from "next-auth";
 import authService from "./services/api/auth-service";
@@ -51,12 +49,15 @@ export default {
 
       return baseUrl;
     },
-
-    session: ({ session }) => {
+    jwt: ({ token }) => {
+      return token;
+    },
+    session: ({ session, token }) => {
       return {
         ...session,
         user: {
           ...session.user,
+          accessToken: "test",
         },
       };
     },

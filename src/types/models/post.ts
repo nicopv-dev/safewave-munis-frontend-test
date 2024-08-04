@@ -6,8 +6,8 @@ export default interface Post {
   title: string;
   content: string;
   isActive: boolean;
-  image: string;
+  image?: string;
 
   author: Author;
-  municipality: Municipality;
+  municipality?: Municipality;
 }

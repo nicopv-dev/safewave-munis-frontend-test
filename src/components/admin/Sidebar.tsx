@@ -4,18 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/images/safewave.png";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
-import {
-  Home01Icon,
-  DocumentCodeIcon,
-  NeuralNetworkIcon,
-  UserSearch01Icon,
-  Configuration01Icon,
-} from "hugeicons-react";
+import { Home01Icon, DocumentCodeIcon, Profile02Icon } from "hugeicons-react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Session } from "next-auth";
+import { DoorClosed } from "lucide-react";
 
 const LINKS = [
   {
@@ -28,21 +23,21 @@ const LINKS = [
     href: "/admin/publicaciones",
     icon: DocumentCodeIcon,
   },
-  {
-    name: "Redes",
-    href: "/admin/redes-vecinales",
-    icon: NeuralNetworkIcon,
-  },
-  {
-    name: "Vecinos",
-    href: "/admin/vecinos",
-    icon: UserSearch01Icon,
-  },
-  {
-    name: "Configuracion",
-    href: "/admin/configuracion",
-    icon: Configuration01Icon,
-  },
+  // {
+  //   name: "Redes",
+  //   href: "/admin/redes-vecinales",
+  //   icon: NeuralNetworkIcon,
+  // },
+  // {
+  //   name: "Vecinos",
+  //   href: "/admin/vecinos",
+  //   icon: UserSearch01Icon,
+  // },
+  // {
+  //   name: "Configuracion",
+  //   href: "/admin/configuracion",
+  //   icon: Configuration01Icon,
+  // },
 ];
 
 interface Props {
@@ -59,7 +54,7 @@ export default function Sidebar({ session }: Props) {
   }, [pathname]);
 
   return (
-    <aside className="sticky top-0 left-0 w-72 px-6 h-screen flex flex-col justify-between py-4 gap-4 border-r border-r-gray-200">
+    <aside className="bg-primary sticky top-0 left-0 w-72 px-5 h-screen flex flex-col justify-between py-4 gap-4 border-r border-r-gray-200">
       {/* logo */}
       <div className="h-16 w-full flex justify-center items-center">
         <Image src={logo} alt="logo" width={100} height={50} />
@@ -74,8 +69,8 @@ export default function Sidebar({ session }: Props) {
               className={cn(
                 " flex items-center gap-1 transition-all duration-200 ease-in-out py-2 rounded-md px-4",
                 activeLink === link.href
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
+                  ? "bg-secondary text-white"
+                  : "text-white hover:text-secondary"
               )}
             >
               <link.icon size={16} />
@@ -88,20 +83,40 @@ export default function Sidebar({ session }: Props) {
       {/* user */}
       {session && (
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-1">
-            <div className="w-8 h-8 rounded-full bg-primary" />
-            <div className="flex flex-col">
-              <span className="text-gray-900 text-xs">
+          <div className="flex items-center gap-1.5">
+            <Image
+              alt="logo"
+              src={
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM_CC0zVNawHLtKnaEGlTlggFTuHvgMWbK-35Pre8loif844eNkn2LCvbTnjaKbypWi0A&usqp=CAU"
+              }
+              width={42}
+              height={42}
+              className="rounded-full object-cover border-2 border-gray-400/50"
+            />
+            <div className="flex flex-col grow">
+              <span className="text-white text-xs font-medium">
                 {session.user?.name}
               </span>
-              <span className="text-gray-500 text-xs">Temuco</span>
+              <span className="text-zinc-100 text-[10px] font-light">
+                Temuco
+              </span>
+            </div>
+
+            <div>
+              <Link
+                href="/admin/configuracion"
+                className="text-white p-2 rounded-full"
+              >
+                <Profile02Icon size={20} />
+              </Link>
             </div>
           </div>
           <button
             type="button"
             onClick={() => signOut()}
-            className="btn btn-sm btn-primary w-full"
+            className="btn btn-sm btn-secondary w-full"
           >
+            <DoorClosed size={12} />
             Cerrar sesion
           </button>
         </div>

@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <SessionProvider>
         <body className={cn("font-sans antialiased", font.variable)}>
+          <NextTopLoader color="#F8C62A" easing="ease" showSpinner={false} />
           {children}
         </body>
       </SessionProvider>

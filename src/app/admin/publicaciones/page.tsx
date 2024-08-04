@@ -1,9 +1,11 @@
-import { POST_DATA } from "@/utils/data";
+import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PostsTable from "@/components/admin/tables/PostsTable";
 import { GroupIcon, ListIcon } from "lucide-react";
 import postService from "@/services/api/post-service";
 import imageService from "@/services/api/image-service";
+import { Button } from "@/components/ui/button";
+import { Add01Icon, DocumentCodeIcon } from "hugeicons-react";
 
 const getData = async () => {
   try {
@@ -26,7 +28,10 @@ export default async function Publicaciones() {
   return (
     <div className="flex flex-col gap-6">
       <div className="space-y-1">
-        <h2 className="text-2xl font-semibold">Mis Publicaciones</h2>
+        <div className="flex items-center gap-1">
+          <DocumentCodeIcon />
+          <h2 className="text-2xl font-semibold">Mis Publicaciones</h2>
+        </div>
         <p className="text-gray-500 text-sm">
           Aqui se depliegan las publicaciones que has realizado dentro de
           SafeWave
@@ -42,7 +47,15 @@ export default async function Publicaciones() {
               <GroupIcon />
             </TabsTrigger>
           </div>
-          <button className="btn btn-primary btn-md">Nueva Publicacion</button>
+          <Button asChild>
+            <Link
+              href={"/admin/publicaciones/crear"}
+              className="flex items-center gap-1"
+            >
+              <Add01Icon size={14} />
+              Nueva Publicacion
+            </Link>
+          </Button>
         </TabsList>
 
         <TabsContent value="list">
@@ -53,12 +66,14 @@ export default async function Publicaciones() {
             <div className="grid grid-cols-4 gap-4">
               {data.map((post, index) => (
                 <article key={index} className="card bg-base-100 shadow">
-                  <figure>
-                    <img
-                      src={imageService.getImageUrl(post.image)}
-                      alt="Shoes"
-                    />
-                  </figure>
+                  {post.image && (
+                    <figure>
+                      <img
+                        src={imageService.getImageUrl(post.image)}
+                        alt="Shoes"
+                      />
+                    </figure>
+                  )}
                   <div className="card-body">
                     <div className="badge badge-error text-xs text-white">
                       Robo

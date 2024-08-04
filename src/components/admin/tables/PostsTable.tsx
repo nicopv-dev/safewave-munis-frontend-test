@@ -23,10 +23,10 @@ export default function PostsTable({ data }: Props) {
       <TableHeader className="bg-white">
         <TableRow>
           <TableHead className="w-[100px]">#</TableHead>
-          <TableHead>Usuario</TableHead>
           <TableHead>Titulo</TableHead>
           <TableHead>Descripcion</TableHead>
           <TableHead>Imagen</TableHead>
+          <TableHead>Autor</TableHead>
           <TableHead className="text-right">Fecha</TableHead>
         </TableRow>
       </TableHeader>
@@ -36,19 +36,23 @@ export default function PostsTable({ data }: Props) {
             <TableCell className="font-medium text-ellipsis">
               {post.id}
             </TableCell>
-            <TableCell>
-              {post.author.firstName} {post.author.lastName}
-            </TableCell>
             <TableCell>{post.title}</TableCell>
             <TableCell>{post.content}</TableCell>
             <TableCell>
-              <a
-                href={imageService.getImageUrl(post.image)}
-                className="text-blue-600"
-                target="_blank"
-              >
-                Imagen
-              </a>
+              {post.image ? (
+                <a
+                  href={imageService.getImageUrl(post.image)}
+                  className="text-blue-600"
+                  target="_blank"
+                >
+                  Imagen
+                </a>
+              ) : (
+                <p>Sin imagen</p>
+              )}
+            </TableCell>
+            <TableCell>
+              {post.author.firstName} {post.author.lastName}
             </TableCell>
             <TableCell className="text-right">2014</TableCell>
           </TableRow>

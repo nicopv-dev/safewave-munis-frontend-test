@@ -4,6 +4,8 @@ import { Bar, BarChart } from "recharts";
 import Example from "@/components/admin/charts/example";
 import CustomPieChart from "@/components/admin/charts/pie-chart";
 import CustomRadialChart from "@/components/admin/charts/radial-chart";
+import { ChartBarIcon } from "lucide-react";
+import { CustomAreaChart } from "@/components/admin/charts/area-chart";
 
 export const metadata: Metadata = {
   title: "Municipalidad de Test - SafeWave",
@@ -33,7 +35,11 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-1">
-        <h2 className="text-2xl font-semibold">Resumen</h2>
+        <div className="flex items-center gap-1">
+          <ChartBarIcon />
+          <h2 className="text-2xl font-semibold">Resumen</h2>
+        </div>
+
         <p className="text-gray-500 text-sm">
           Aqui se depliegan un resumen de las redes vecinales de tu comuna y
           todas las publicaciones
@@ -45,6 +51,10 @@ export default function Home() {
         <CustomRadialChart title="Accidentes" />
         <CustomRadialChart title="Personas Extraviadas" />
         <CustomRadialChart title="Otro" />
+      </div>
+
+      <div>
+        <CustomAreaChart />
       </div>
 
       <div className="col-span-2">
